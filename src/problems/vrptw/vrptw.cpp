@@ -9,6 +9,7 @@ All rights reserved (see LICENSE).
 
 #include <mutex>
 #include <thread>
+#include <iostream>
 
 #include "algorithms/heuristics/heuristics.h"
 #include "algorithms/local_search/local_search.h"
@@ -193,7 +194,10 @@ Solution VRPTW::solve(unsigned exploration_level,
         search_time = timeout.value() / param_ranks.size();
       }
 
+      std::cout << "Thread " << std::this_thread::get_id() << " starting processing\n";
+
       for (auto rank : param_ranks) {
+        std::cout << "Thread " << std::this_thread::get_id() << " processing rank " << rank << " heuristic\n";
         auto& p = parameters[rank];
         switch (p.heuristic) {
         case HEURISTIC::INIT_ROUTES:
@@ -211,6 +215,7 @@ Solution VRPTW::solve(unsigned exploration_level,
           break;
         }
 
+        std::cout << "Thread " << std::this_thread::get_id() << " processing rank " << rank << " local search\n";
         // Local search phase.
         vrptw::LocalSearch ls(_input,
                               tw_solutions[rank],
@@ -223,6 +228,7 @@ Solution VRPTW::solve(unsigned exploration_level,
 #ifdef LOG_LS_OPERATORS
         ls_stats[rank] = ls.get_stats();
 #endif
+        std::cout << "Thread " << std::this_thread::get_id() << " finished processing\n";
       }
     } catch (...) {
       ep_m.lock();
