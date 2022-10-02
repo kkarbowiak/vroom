@@ -246,8 +246,9 @@ Solution CVRP::solve(unsigned exploration_level,
 #ifdef LOG_LS_OPERATORS
         ls_stats[rank] = ls.get_stats();
 #endif
-        std::cout << "Thread " << std::this_thread::get_id() << " finished processing\n";
       }
+
+      std::cout << "Thread " << std::this_thread::get_id() << " finished processing\n";
     } catch (...) {
       ep_m.lock();
       ep = std::current_exception();
