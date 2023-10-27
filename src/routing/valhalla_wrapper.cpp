@@ -136,7 +136,7 @@ bool ValhallaWrapper::distance_value_is_null(
 UserDuration ValhallaWrapper::get_duration_value(
   const rapidjson::Value& matrix_entry) const {
   assert(matrix_entry["time"].IsUint());
-  return matrix_entry["time"].GetUint();
+  return UserDuration(matrix_entry["time"].GetUint());
 }
 
 UserDistance ValhallaWrapper::get_distance_value(

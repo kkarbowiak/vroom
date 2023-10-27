@@ -1114,15 +1114,15 @@ Route choose_ETA(const Input& input,
   assert(task_tw_ranks.size() == n);
 
   // Generate route.
-  UserDuration user_duration = 0;
-  UserDuration user_waiting_time = 0;
+  UserDuration user_duration = std::chrono::seconds(0);
+  UserDuration user_waiting_time = std::chrono::seconds(0);
   Duration setup = 0;
   Duration service = 0;
   Priority priority = 0;
   Amount sum_pickups(input.zero_amount());
   Amount sum_deliveries(input.zero_amount());
-  UserDuration user_lead_time = 0;
-  UserDuration user_delay = 0;
+  UserDuration user_lead_time = std::chrono::seconds(0);
+  UserDuration user_delay = std::chrono::seconds(0);
   unsigned number_of_tasks = 0;
   std::unordered_set<VIOLATION> v_types;
 
@@ -1349,9 +1349,9 @@ Route choose_ETA(const Input& input,
       // Pro rata temporis distance increase.
       if (evals[previous_rank_in_J].duration != 0) {
         breaks_distances_sum += utils::round<UserDistance>(
-          static_cast<double>(user_travel_time *
+          static_cast<double>(user_travel_time.count() *
                               evals[previous_rank_in_J].distance) /
-          utils::scale_to_user_duration(evals[previous_rank_in_J].duration));
+          utils::scale_to_user_duration(evals[previous_rank_in_J].duration).count());
       }
       current.distance = breaks_distances_sum;
 

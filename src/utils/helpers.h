@@ -26,6 +26,11 @@ template <typename T> T round(double value) {
   return static_cast<T>(value + round_increment);
 }
 
+template <> UserDuration round(double value) {
+  constexpr double round_increment = 0.5;
+  return UserDuration(UserDuration::rep(value + round_increment));
+}
+
 TimePoint now();
 
 Amount max_amount(std::size_t size);

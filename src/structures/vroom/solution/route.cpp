@@ -65,7 +65,7 @@ void Route::check_timing_consistency() const {
   auto total_waiting_time = steps.front().waiting_time;
 
   auto previous_duration = steps.front().duration;
-  assert(previous_duration == 0);
+  assert(previous_duration == std::chrono::seconds(0));
 
   assert(previous_departure == current_arrival);
   assert(steps.back().arrival == steps.back().departure());

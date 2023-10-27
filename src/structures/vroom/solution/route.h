@@ -50,7 +50,7 @@ struct Route {
         Amount pickup,
         std::string profile,
         std::string description,
-        Violations&& violations = Violations(0, 0));
+        Violations&& violations = Violations(std::chrono::seconds(0), std::chrono::seconds(0)));
 
   void check_timing_consistency() const;
 };

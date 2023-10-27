@@ -52,7 +52,7 @@ void CostWrapper::set_costs_matrix(const Matrix<UserCost>* matrix,
 UserCost CostWrapper::user_cost_from_user_metrics(UserDuration d,
                                                   UserDistance m) const {
   assert(_cost_based_on_metrics);
-  return utils::round<UserCost>(static_cast<double>(d * _per_hour) / 3600 +
+  return utils::round<UserCost>(static_cast<double>(d.count() * _per_hour) / 3600 +
                                 static_cast<double>(m * _per_km) / 1000);
 }
 

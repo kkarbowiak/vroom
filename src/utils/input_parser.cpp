@@ -161,7 +161,7 @@ inline TimeWindow get_time_window(const rapidjson::Value& tw) {
   if (!tw.IsArray() || tw.Size() < 2 || !tw[0].IsUint() || !tw[1].IsUint()) {
     throw InputException("Invalid time-window.");
   }
-  return TimeWindow(tw[0].GetUint(), tw[1].GetUint());
+  return TimeWindow(std::chrono::seconds(tw[0].GetUint()), std::chrono::seconds(tw[1].GetUint()));
 }
 
 inline TimeWindow get_vehicle_time_window(const rapidjson::Value& v) {
@@ -292,7 +292,7 @@ inline std::vector<VehicleStep> get_vehicle_steps(const rapidjson::Value& v) {
           throw InputException("Invalid service_at value.");
         }
 
-        at = json_step["service_at"].GetUint();
+        at = std::chrono::seconds(json_step["service_at"].GetUint());
       }
       std::optional<UserDuration> after;
       if (json_step.HasMember("service_after")) {
@@ -300,7 +300,7 @@ inline std::vector<VehicleStep> get_vehicle_steps(const rapidjson::Value& v) {
           throw InputException("Invalid service_after value.");
         }
 
-        after = json_step["service_after"].GetUint();
+        after = std::chrono::seconds(json_step["service_after"].GetUint());
       }
       std::optional<UserDuration> before;
       if (json_step.HasMember("service_before")) {
@@ -308,7 +308,7 @@ inline std::vector<VehicleStep> get_vehicle_steps(const rapidjson::Value& v) {
           throw InputException("Invalid service_before value.");
         }
 
-        before = json_step["service_before"].GetUint();
+        before = std::chrono::seconds(json_step["service_before"].GetUint());
       }
       ForcedService forced_service(at, after, before);
 
@@ -491,7 +491,7 @@ template <class T> inline Matrix<T> get_matrix(rapidjson::Value& m) {
       if (!mi[j].IsUint()) {
         throw InputException("Invalid matrix entry.");
       }
-      matrix[i][j] = mi[j].GetUint();
+      matrix[i][j] = T(mi[j].GetUint());
     }
   }
 

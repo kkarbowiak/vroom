@@ -575,8 +575,8 @@ Route format_route(const Input& input,
   // Values summed up while going through the route.
   Eval eval_sum;
   Duration duration = 0;
-  UserDuration user_duration = 0;
-  UserDuration user_waiting_time = 0;
+  UserDuration user_duration = std::chrono::seconds(0);
+  UserDuration user_waiting_time = std::chrono::seconds(0);
   Duration setup = 0;
   Duration service = 0;
   Duration forward_wt = 0;
@@ -658,7 +658,7 @@ Route format_route(const Input& input,
       assert(b_tw->start % DURATION_FACTOR == 0 &&
              scale_to_user_duration(b_tw->start) <=
                current_break.arrival + current_break.waiting_time &&
-             (current_break.waiting_time == 0 ||
+             (current_break.waiting_time == std::chrono::seconds(0) ||
               scale_to_user_duration(b_tw->start) ==
                 current_break.arrival + current_break.waiting_time));
 
@@ -748,7 +748,7 @@ Route format_route(const Input& input,
       j_tw->start % DURATION_FACTOR == 0 &&
       scale_to_user_duration(j_tw->start) <=
         current.arrival + current.waiting_time &&
-      (current.waiting_time == 0 || scale_to_user_duration(j_tw->start) ==
+      (current.waiting_time == std::chrono::seconds(0) || scale_to_user_duration(j_tw->start) ==
                                       current.arrival + current.waiting_time));
 
     step_start += (current_setup + current_job.service);

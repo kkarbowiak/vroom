@@ -63,7 +63,7 @@ public:
 
   Duration duration(Index i, Index j) const {
     return discrete_duration_factor *
-           static_cast<Duration>(duration_data[i * duration_matrix_size + j]);
+           static_cast<Duration>(duration_data[i * duration_matrix_size + j].count());
   }
 
   Distance distance(Index i, Index j) const {
