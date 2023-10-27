@@ -1133,13 +1133,12 @@ Solution Input::solve(unsigned exploration_level,
                              _has_initial_routes ? h_init_routes : h_param);
 
   // Update timing info.
-  sol.summary.computing_times.loading = loading.count();
+  sol.summary.computing_times.loading = loading;
 
   _end_solving = std::chrono::high_resolution_clock::now();
   sol.summary.computing_times.solving =
     std::chrono::duration_cast<std::chrono::milliseconds>(_end_solving -
-                                                          _end_loading)
-      .count();
+                                                          _end_loading);
 
   if (_geometry) {
     for (auto& route : sol.routes) {

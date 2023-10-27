@@ -29,11 +29,11 @@ get_violations(const Violations& violations,
       using enum VIOLATION;
     case LEAD_TIME:
       cause = "lead_time";
-      json_violation.AddMember("duration", violations.lead_time, allocator);
+      json_violation.AddMember("duration", violations.lead_time.count(), allocator);
       break;
     case DELAY:
       cause = "delay";
-      json_violation.AddMember("duration", violations.delay, allocator);
+      json_violation.AddMember("duration", violations.delay.count(), allocator);
       break;
     case LOAD:
       cause = "load";
@@ -177,10 +177,10 @@ rapidjson::Value to_json(const Summary& summary,
     json_summary.AddMember("pickup", json_pickup, allocator);
   }
 
-  json_summary.AddMember("setup", summary.setup, allocator);
-  json_summary.AddMember("service", summary.service, allocator);
-  json_summary.AddMember("duration", summary.duration, allocator);
-  json_summary.AddMember("waiting_time", summary.waiting_time, allocator);
+  json_summary.AddMember("setup", summary.setup.count(), allocator);
+  json_summary.AddMember("service", summary.service.count(), allocator);
+  json_summary.AddMember("duration", summary.duration.count(), allocator);
+  json_summary.AddMember("waiting_time", summary.waiting_time.count(), allocator);
   json_summary.AddMember("priority", summary.priority, allocator);
 
   if (report_distances) {
@@ -236,10 +236,10 @@ rapidjson::Value to_json(const Route& route,
     json_route.AddMember("pickup", json_pickup, allocator);
   }
 
-  json_route.AddMember("setup", route.setup, allocator);
-  json_route.AddMember("service", route.service, allocator);
-  json_route.AddMember("duration", route.duration, allocator);
-  json_route.AddMember("waiting_time", route.waiting_time, allocator);
+  json_route.AddMember("setup", route.setup.count(), allocator);
+  json_route.AddMember("service", route.service.count(), allocator);
+  json_route.AddMember("duration", route.duration.count(), allocator);
+  json_route.AddMember("waiting_time", route.waiting_time.count(), allocator);
   json_route.AddMember("priority", route.priority, allocator);
 
   if (report_distances) {
@@ -270,9 +270,9 @@ rapidjson::Value to_json(const ComputingTimes& ct,
                          rapidjson::Document::AllocatorType& allocator) {
   rapidjson::Value json_ct(rapidjson::kObjectType);
 
-  json_ct.AddMember("loading", ct.loading, allocator);
-  json_ct.AddMember("solving", ct.solving, allocator);
-  json_ct.AddMember("routing", ct.routing, allocator);
+  json_ct.AddMember("loading", ct.loading.count(), allocator);
+  json_ct.AddMember("solving", ct.solving.count(), allocator);
+  json_ct.AddMember("routing", ct.routing.count(), allocator);
 
   return json_ct;
 }
@@ -336,9 +336,9 @@ rapidjson::Value to_json(const Step& s,
     json_step.AddMember("id", s.id, allocator);
   }
 
-  json_step.AddMember("setup", s.setup, allocator);
-  json_step.AddMember("service", s.service, allocator);
-  json_step.AddMember("waiting_time", s.waiting_time, allocator);
+  json_step.AddMember("setup", s.setup.count(), allocator);
+  json_step.AddMember("service", s.service.count(), allocator);
+  json_step.AddMember("waiting_time", s.waiting_time.count(), allocator);
 
   // Should be removed at some point as step.job is deprecated.
   if (s.step_type == STEP_TYPE::JOB) {
@@ -353,8 +353,8 @@ rapidjson::Value to_json(const Step& s,
     json_step.AddMember("load", json_load, allocator);
   }
 
-  json_step.AddMember("arrival", s.arrival, allocator);
-  json_step.AddMember("duration", s.duration, allocator);
+  json_step.AddMember("arrival", s.arrival.count(), allocator);
+  json_step.AddMember("duration", s.duration.count(), allocator);
 
   json_step.AddMember("violations",
                       get_violations(s.violations, allocator),

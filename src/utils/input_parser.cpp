@@ -95,12 +95,12 @@ inline Skills get_skills(const rapidjson::Value& object) {
 
 inline UserDuration get_duration(const rapidjson::Value& object,
                                  const char* key) {
-  UserDuration duration = 0;
+  UserDuration duration = std::chrono::seconds(0);
   if (object.HasMember(key)) {
     if (!object[key].IsUint()) {
       throw InputException("Invalid " + std::string(key) + " duration.");
     }
-    duration = object[key].GetUint();
+    duration = std::chrono::seconds(object[key].GetUint());
   }
   return duration;
 }
@@ -124,7 +124,7 @@ inline std::optional<T> get_value_for(const rapidjson::Value& object,
     if (!object[key].IsUint()) {
       throw InputException("Invalid " + std::string(key) + " value.");
     }
-    value = object[key].GetUint();
+    value = T(object[key].GetUint());
   }
   return value;
 }

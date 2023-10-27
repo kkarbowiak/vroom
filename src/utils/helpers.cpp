@@ -394,7 +394,7 @@ Solution format_solution(const Input& input, const RawSolution& raw_routes) {
                         eval_sum.distance,
                         scale_to_user_duration(setup),
                         scale_to_user_duration(service),
-                        0,
+                        std::chrono::seconds(0),
                         priority,
                         sum_deliveries,
                         sum_pickups,
@@ -672,8 +672,8 @@ Route format_route(const Input& input,
       // Pro rata temporis distance increase.
       if (current_eval.duration != 0) {
         user_distance += round<UserDistance>(
-          static_cast<double>(user_travel_time * current_eval.distance) /
-          scale_to_user_duration(current_eval.duration));
+          static_cast<double>(user_travel_time.count() * current_eval.distance) /
+          scale_to_user_duration(current_eval.duration).count());
       }
       current_break.distance = user_distance;
 
@@ -815,7 +815,7 @@ Route format_route(const Input& input,
     assert(b_tw->start % DURATION_FACTOR == 0 &&
            scale_to_user_duration(b_tw->start) <=
              current_break.arrival + current_break.waiting_time &&
-           (current_break.waiting_time == 0 ||
+           (current_break.waiting_time == std::chrono::seconds(0) ||
             scale_to_user_duration(b_tw->start) ==
               current_break.arrival + current_break.waiting_time));
 
@@ -829,8 +829,8 @@ Route format_route(const Input& input,
     // Pro rata temporis distance increase.
     if (current_eval.duration != 0) {
       user_distance += round<UserDistance>(
-        static_cast<double>(user_travel_time * current_eval.distance) /
-        scale_to_user_duration(current_eval.duration));
+        static_cast<double>(user_travel_time.count() * current_eval.distance) /
+        scale_to_user_duration(current_eval.duration).count());
     }
     current_break.distance = user_distance;
 
