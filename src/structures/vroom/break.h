@@ -28,7 +28,7 @@ struct Break {
   Break(Id id,
         const std::vector<TimeWindow>& tws =
           std::vector<TimeWindow>(1, TimeWindow()),
-        UserDuration service = 0,
+        UserDuration service = std::chrono::seconds(0),
         std::string description = "",
         std::optional<Amount> max_load = std::optional<Amount>());
 

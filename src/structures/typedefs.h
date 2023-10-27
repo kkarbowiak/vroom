@@ -32,7 +32,7 @@ using Id = uint64_t;
 using Index = uint16_t;
 using UserCost = uint32_t;
 using Cost = int64_t;
-using UserDuration = uint32_t;
+using UserDuration = std::chrono::seconds;
 using Duration = int64_t;
 using UserDistance = uint32_t;
 using Distance = int64_t;
@@ -190,7 +190,7 @@ struct StringHash {
 
 namespace utils {
 inline Duration scale_from_user_duration(UserDuration d) {
-  return DURATION_FACTOR * static_cast<Duration>(d);
+  return DURATION_FACTOR * static_cast<Duration>(d.count());
 }
 
 inline UserDuration scale_to_user_duration(Duration d) {

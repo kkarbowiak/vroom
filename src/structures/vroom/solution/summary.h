@@ -32,7 +32,7 @@ struct Summary {
   UserDistance distance{0};
   ComputingTimes computing_times;
 
-  Violations violations{0, 0};
+  Violations violations{{0}, {0}};
 
   Summary();
 
