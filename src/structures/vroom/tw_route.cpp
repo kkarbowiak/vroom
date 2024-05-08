@@ -1004,13 +1004,15 @@ bool TWRoute::is_valid_addition_for_tw(const Input& input,
   return current.earliest + next.travel <= next.latest;
 }
 
-template <std::random_access_iterator Iter>
+template <std::ranges::random_access_range Range>
 void TWRoute::replace(const Input& input,
                       const Amount& delivery,
-                      const Iter first_job,
-                      const Iter last_job,
+                      const Range& range,
                       const Index first_rank,
                       const Index last_rank) {
+  const auto first_job = range.begin();
+  const auto last_job = range.end();
+
   assert(first_job <= last_job);
   assert(first_rank <= last_rank);
 
@@ -1476,30 +1478,28 @@ template bool TWRoute::is_valid_addition_for_tw(
 
 template void TWRoute::replace(const Input& input,
                                const Amount& delivery,
-                               const std::vector<Index>::iterator first_job,
-                               const std::vector<Index>::iterator last_job,
+                               const std::vector<Index>& range,
                                const Index first_rank,
                                const Index last_rank);
+
 template void
 TWRoute::replace(const Input& input,
                  const Amount& delivery,
-                 const std::vector<Index>::const_iterator first_job,
-                 const std::vector<Index>::const_iterator last_job,
-                 const Index first_rank,
-                 const Index last_rank);
-template void
-TWRoute::replace(const Input& input,
-                 const Amount& delivery,
-                 const std::vector<Index>::reverse_iterator first_job,
-                 const std::vector<Index>::reverse_iterator last_job,
+                 const std::ranges::subrange<std::vector<Index>::iterator>& range,
                  const Index first_rank,
                  const Index last_rank);
 
 template void
 TWRoute::replace(const Input& input,
                  const Amount& delivery,
-                 const std::array<Index, 1>::const_iterator first_job,
-                 const std::array<Index, 1>::const_iterator last_job,
+                 const std::ranges::subrange<std::vector<Index>::reverse_iterator>& range,
+                 const Index first_rank,
+                 const Index last_rank);
+
+template void
+TWRoute::replace(const Input& input,
+                 const Amount& delivery,
+                 const std::array<Index, 1>& range,
                  const Index first_rank,
                  const Index last_rank);
 

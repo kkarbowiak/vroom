@@ -74,8 +74,7 @@ void IntraMixedExchange::apply() {
 
   _tw_s_route.replace(_input,
                       _delivery,
-                      _moved_jobs.begin(),
-                      _moved_jobs.end(),
+                      _moved_jobs,
                       _first_rank,
                       _last_rank);
 }

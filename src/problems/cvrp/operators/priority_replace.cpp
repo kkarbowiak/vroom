@@ -190,7 +190,7 @@ void PriorityReplace::apply() {
                   [this](const auto j) { return !_unassigned.contains(j); }));
     _unassigned.insert(s_route.cbegin(), s_route.cbegin() + s_rank + 1);
 
-    source.replace(_input, addition.begin(), addition.end(), 0, s_rank + 1);
+    source.replace(_input, addition, 0, s_rank + 1);
   } else {
     assert(
       std::all_of(s_route.cbegin() + t_rank,
@@ -199,8 +199,7 @@ void PriorityReplace::apply() {
     _unassigned.insert(s_route.cbegin() + t_rank, s_route.cend());
 
     source.replace(_input,
-                   addition.begin(),
-                   addition.end(),
+                   addition,
                    t_rank,
                    s_route.size());
   }

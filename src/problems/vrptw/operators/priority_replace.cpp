@@ -80,8 +80,7 @@ void PriorityReplace::apply() {
 
     _tw_s_route.replace(_input,
                         _input.jobs[_u].delivery,
-                        addition.begin(),
-                        addition.end(),
+                        addition,
                         0,
                         s_rank + 1);
   } else {
@@ -93,8 +92,7 @@ void PriorityReplace::apply() {
 
     _tw_s_route.replace(_input,
                         _input.jobs[_u].delivery,
-                        addition.begin(),
-                        addition.end(),
+                        addition,
                         t_rank,
                         s_route.size());
   }

@@ -284,8 +284,7 @@ void LocalSearch<Route,
 
         _sol[best_route].replace(_input,
                                  best_insertion.delivery,
-                                 modified_with_pd.begin(),
-                                 modified_with_pd.end(),
+                                 modified_with_pd,
                                  best_insertion.pickup_rank,
                                  best_insertion.delivery_rank);
 
@@ -2433,8 +2432,7 @@ void LocalSearch<Route,
 
         _sol[v].replace(_input,
                         _sol[v].delivery_in_range(r + 1, delivery_r),
-                        between_pd.begin(),
-                        between_pd.end(),
+                        between_pd,
                         r,
                         delivery_r + 1);
       }

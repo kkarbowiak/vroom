@@ -12,6 +12,7 @@ All rights reserved (see LICENSE).
 
 #include "structures/typedefs.h"
 #include "structures/vroom/input/input.h"
+#include <ranges>
 
 namespace vroom {
 
@@ -204,21 +205,19 @@ public:
   // Add the range [first_job; last_job) in the existing route at rank
   // first_rank and before last_rank *in place of* the current jobs
   // that may be there.
-  template <std::forward_iterator Iter>
+  template <std::ranges::forward_range Range>
   void replace(const Input& input,
-               const Iter first_job,
-               const Iter last_job,
+               const Range& range,
                const Index first_rank,
                const Index last_rank);
 
-  template <std::forward_iterator Iter>
+  template <std::ranges::forward_range Range>
   void replace(const Input& input,
                const Amount&,
-               const Iter first_job,
-               const Iter last_job,
+               const Range& range,
                const Index first_rank,
                const Index last_rank) {
-    replace(input, first_job, last_job, first_rank, last_rank);
+    replace(input, range, first_rank, last_rank);
   }
 };
 

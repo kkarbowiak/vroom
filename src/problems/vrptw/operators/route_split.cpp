@@ -8,6 +8,7 @@ All rights reserved (see LICENSE).
 */
 
 #include "problems/vrptw/operators/route_split.h"
+#include <ranges>
 
 namespace vroom::vrptw {
 
@@ -61,8 +62,7 @@ void RouteSplit::apply() {
 
   end_route.replace(_input,
                     end_delivery,
-                    s_route.begin() + choice.split_rank,
-                    s_route.end(),
+                    std::ranges::subrange(s_route.begin() + choice.split_rank, s_route.end()),
                     0,
                     0);
   assert(end_route.max_load() ==
@@ -77,8 +77,7 @@ void RouteSplit::apply() {
 
   begin_route.replace(_input,
                       begin_delivery,
-                      s_route.begin(),
-                      s_route.begin() + choice.split_rank,
+                      std::ranges::subrange(s_route.begin(), s_route.begin() + choice.split_rank),
                       0,
                       0);
   assert(begin_route.max_load() ==

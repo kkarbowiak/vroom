@@ -35,8 +35,7 @@ bool TSPFix::is_valid() {
 void TSPFix::apply() {
   _tw_s_route.replace(_input,
                       source.job_deliveries_sum(),
-                      tsp_route.begin(),
-                      tsp_route.end(),
+                      tsp_route,
                       0,
                       s_route.size());
 }

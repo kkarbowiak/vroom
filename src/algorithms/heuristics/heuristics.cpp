@@ -204,7 +204,7 @@ Eval basic(const Input& input,
           std::vector<Index> p_d(
             {best_job_rank, static_cast<Index>(best_job_rank + 1)});
           current_r
-            .replace(input, input.zero_amount(), p_d.begin(), p_d.end(), 0, 0);
+            .replace(input, input.zero_amount(), p_d, 0, 0);
           unassigned.erase(best_job_rank);
           unassigned.erase(best_job_rank + 1);
         }
@@ -400,8 +400,7 @@ Eval basic(const Input& input,
 
           current_r.replace(input,
                             best_modified_delivery,
-                            modified_with_pd.begin(),
-                            modified_with_pd.end(),
+                            modified_with_pd,
                             best_pickup_r,
                             best_delivery_r);
           unassigned.erase(best_job_rank);
@@ -650,7 +649,7 @@ Eval dynamic_vehicle_choice(const Input& input,
           std::vector<Index> p_d(
             {best_job_rank, static_cast<Index>(best_job_rank + 1)});
           current_r
-            .replace(input, input.zero_amount(), p_d.begin(), p_d.end(), 0, 0);
+            .replace(input, input.zero_amount(), p_d, 0, 0);
           unassigned.erase(best_job_rank);
           unassigned.erase(best_job_rank + 1);
         }
@@ -843,8 +842,7 @@ Eval dynamic_vehicle_choice(const Input& input,
 
           current_r.replace(input,
                             best_modified_delivery,
-                            modified_with_pd.begin(),
-                            modified_with_pd.end(),
+                            modified_with_pd,
                             best_pickup_r,
                             best_delivery_r);
           unassigned.erase(best_job_rank);
@@ -997,8 +995,7 @@ void initial_routes(const Input& input, std::vector<Route>& routes) {
 
       current_r.replace(input,
                         single_jobs_deliveries,
-                        job_ranks.begin(),
-                        job_ranks.end(),
+                        job_ranks,
                         0,
                         0);
     }

@@ -8,6 +8,7 @@ All rights reserved (see LICENSE).
 */
 
 #include "problems/vrptw/operators/cross_exchange.h"
+#include <ranges>
 
 namespace vroom::vrptw {
 
@@ -117,24 +118,21 @@ void CrossExchange::apply() {
   if (!reverse_s_edge) {
     _tw_t_route.replace(_input,
                         source_delivery,
-                        s_route.begin() + s_rank,
-                        s_route.begin() + s_rank + 2,
+                        std::ranges::subrange(s_route.begin() + s_rank, s_route.begin() + s_rank + 2),
                         t_rank,
                         t_rank + 2);
   } else {
     auto s_reverse_start = s_route.rbegin() + s_route.size() - 2 - s_rank;
     _tw_t_route.replace(_input,
                         source_delivery,
-                        s_reverse_start,
-                        s_reverse_start + 2,
+                        std::ranges::subrange(s_reverse_start, s_reverse_start + 2),
                         t_rank,
                         t_rank + 2);
   }
 
   _tw_s_route.replace(_input,
                       target_delivery,
-                      t_job_ranks.begin(),
-                      t_job_ranks.end(),
+                      t_job_ranks,
                       s_rank,
                       s_rank + 2);
 }

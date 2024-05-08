@@ -289,16 +289,15 @@ void RawRoute::remove(const Input& input,
   update_amounts(input);
 }
 
-template <std::forward_iterator Iter>
+template <std::ranges::forward_range Range>
 void RawRoute::replace(const Input& input,
-                       const Iter first_job,
-                       const Iter last_job,
+                       const Range& range,
                        const Index first_rank,
                        const Index last_rank) {
   assert(first_rank <= last_rank);
 
   route.erase(route.begin() + first_rank, route.begin() + last_rank);
-  route.insert(route.begin() + first_rank, first_job, last_job);
+  route.insert(route.begin() + first_rank, range.begin(), range.end());
 
   update_amounts(input);
 }
@@ -325,13 +324,7 @@ template bool RawRoute::is_valid_addition_for_capacity_inclusion(
   const Index first_rank,
   const Index last_rank) const;
 template void RawRoute::replace(const Input& input,
-                                std::vector<Index>::iterator first_job,
-                                std::vector<Index>::iterator last_job,
-                                const Index first_rank,
-                                const Index last_rank);
-template void RawRoute::replace(const Input& input,
-                                std::vector<Index>::const_iterator first_job,
-                                std::vector<Index>::const_iterator last_job,
+                                const std::vector<Index>& range,
                                 const Index first_rank,
                                 const Index last_rank);
 } // namespace vroom

@@ -76,8 +76,7 @@ void PDShift::apply() {
 
   _tw_t_route.replace(_input,
                       _best_t_delivery,
-                      target_with_pd.begin(),
-                      target_with_pd.end(),
+                      target_with_pd,
                       _best_t_p_rank,
                       _best_t_d_rank);
 
@@ -89,8 +88,7 @@ void PDShift::apply() {
 
     _tw_s_route.replace(_input,
                         _tw_s_route.delivery_in_range(_s_p_rank + 1, _s_d_rank),
-                        source_without_pd.begin(),
-                        source_without_pd.end(),
+                        source_without_pd,
                         _s_p_rank,
                         _s_d_rank + 1);
   }

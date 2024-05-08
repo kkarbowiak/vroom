@@ -92,15 +92,13 @@ void MixedExchange::apply() {
 
   _tw_s_route.replace(_input,
                       target_delivery,
-                      t_job_ranks.begin(),
-                      t_job_ranks.end(),
+                      t_job_ranks,
                       s_rank,
                       s_rank + 1);
 
   _tw_t_route.replace(_input,
                       source_delivery,
-                      s_job_ranks.begin(),
-                      s_job_ranks.end(),
+                      s_job_ranks,
                       t_rank,
                       t_rank + 2);
 }

@@ -8,6 +8,7 @@ All rights reserved (see LICENSE).
 */
 
 #include "problems/vrptw/operators/two_opt.h"
+#include <ranges>
 
 namespace vroom::vrptw {
 
@@ -55,14 +56,12 @@ void TwoOpt::apply() {
 
   _tw_t_route.replace(_input,
                       _s_delivery,
-                      s_route.begin() + s_rank + 1,
-                      s_route.end(),
+                      std::ranges::subrange(s_route.begin() + s_rank + 1, s_route.end()),
                       t_rank + 1,
                       t_route.size());
   _tw_s_route.replace(_input,
                       _t_delivery,
-                      t_job_ranks.begin(),
-                      t_job_ranks.end(),
+                      t_job_ranks,
                       s_rank + 1,
                       s_route.size());
 }

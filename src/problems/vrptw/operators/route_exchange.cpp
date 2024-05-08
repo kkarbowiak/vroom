@@ -56,8 +56,7 @@ void RouteExchange::apply() {
   } else {
     _tw_t_route.replace(_input,
                         _source_job_deliveries_sum,
-                        s_route.begin(),
-                        s_route.end(),
+                        s_route,
                         0,
                         t_route.size());
   }
@@ -67,8 +66,7 @@ void RouteExchange::apply() {
   } else {
     _tw_s_route.replace(_input,
                         _target_job_deliveries_sum,
-                        t_job_ranks.begin(),
-                        t_job_ranks.end(),
+                        t_job_ranks,
                         0,
                         s_route.size());
   }

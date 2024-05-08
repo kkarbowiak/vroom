@@ -13,6 +13,7 @@ All rights reserved (see LICENSE).
 #include "structures/typedefs.h"
 #include "structures/vroom/input/input.h"
 #include "structures/vroom/raw_route.h"
+#include <ranges>
 
 namespace vroom {
 
@@ -181,8 +182,7 @@ public:
     const std::array<Index, 1> a({job_rank});
     replace(input,
             input.jobs[job_rank].delivery,
-            a.begin(),
-            a.end(),
+            a,
             rank,
             rank);
   };
@@ -207,8 +207,7 @@ public:
     assert(rank + count <= route.size());
     replace(input,
             input.zero_amount(),
-            route.begin(),
-            route.begin(),
+            std::ranges::subrange(route.begin(), route.begin()),
             rank,
             rank + count);
   };
@@ -217,11 +216,10 @@ public:
   // first_rank and before last_rank *in place of* the current jobs
   // that may be there. "delivery" is the amount delivered in single
   // jobs for inclusion range.
-  template <std::random_access_iterator Iter>
+  template <std::ranges::random_access_range Range>
   void replace(const Input& input,
                const Amount& delivery,
-               const Iter first_job,
-               const Iter last_job,
+               const Range& range,
                const Index first_rank,
                const Index last_rank);
 };

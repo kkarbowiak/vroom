@@ -50,8 +50,7 @@ void IntraTwoOpt::apply() {
 
   _tw_s_route.replace(_input,
                       delivery,
-                      reversed.begin(),
-                      reversed.end(),
+                      reversed,
                       s_rank,
                       t_rank + 1);
 }

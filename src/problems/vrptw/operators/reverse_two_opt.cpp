@@ -8,6 +8,7 @@ All rights reserved (see LICENSE).
 */
 
 #include "problems/vrptw/operators/reverse_two_opt.h"
+#include <ranges>
 
 namespace vroom::vrptw {
 
@@ -57,15 +58,13 @@ void ReverseTwoOpt::apply() {
 
   _tw_t_route.replace(_input,
                       _s_delivery,
-                      s_route.rbegin(),
-                      s_route.rbegin() + s_route.size() - 1 - s_rank,
+                      std::ranges::subrange(s_route.rbegin(), s_route.rbegin() + s_route.size() - 1 - s_rank),
                       0,
                       t_rank + 1);
 
   _tw_s_route.replace(_input,
                       _t_delivery,
-                      t_job_ranks.begin(),
-                      t_job_ranks.end(),
+                      t_job_ranks,
                       s_rank + 1,
                       s_route.size());
 }
