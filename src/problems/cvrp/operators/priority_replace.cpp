@@ -198,10 +198,7 @@ void PriorityReplace::apply() {
                   [this](const auto j) { return !_unassigned.contains(j); }));
     _unassigned.insert(s_route.cbegin() + t_rank, s_route.cend());
 
-    source.replace(_input,
-                   addition,
-                   t_rank,
-                   s_route.size());
+    source.replace(_input, addition, t_rank, s_route.size());
   }
 }
 

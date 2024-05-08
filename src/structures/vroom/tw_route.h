@@ -180,11 +180,7 @@ public:
     assert(rank <= route.size());
     assert(input.jobs[job_rank].type == JOB_TYPE::SINGLE);
     const std::array<Index, 1> a({job_rank});
-    replace(input,
-            input.jobs[job_rank].delivery,
-            a,
-            rank,
-            rank);
+    replace(input, input.jobs[job_rank].delivery, a, rank, rank);
   };
 
   // Check validity for removing a set of jobs from current route at

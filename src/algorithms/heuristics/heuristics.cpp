@@ -203,8 +203,7 @@ Eval basic(const Input& input,
         if (input.jobs[best_job_rank].type == JOB_TYPE::PICKUP) {
           std::vector<Index> p_d(
             {best_job_rank, static_cast<Index>(best_job_rank + 1)});
-          current_r
-            .replace(input, input.zero_amount(), p_d, 0, 0);
+          current_r.replace(input, input.zero_amount(), p_d, 0, 0);
           unassigned.erase(best_job_rank);
           unassigned.erase(best_job_rank + 1);
         }
@@ -648,8 +647,7 @@ Eval dynamic_vehicle_choice(const Input& input,
         if (input.jobs[best_job_rank].type == JOB_TYPE::PICKUP) {
           std::vector<Index> p_d(
             {best_job_rank, static_cast<Index>(best_job_rank + 1)});
-          current_r
-            .replace(input, input.zero_amount(), p_d, 0, 0);
+          current_r.replace(input, input.zero_amount(), p_d, 0, 0);
           unassigned.erase(best_job_rank);
           unassigned.erase(best_job_rank + 1);
         }
@@ -993,11 +991,7 @@ void initial_routes(const Input& input, std::vector<Route>& routes) {
                              std::to_string(vehicle.id) + ".");
       }
 
-      current_r.replace(input,
-                        single_jobs_deliveries,
-                        job_ranks,
-                        0,
-                        0);
+      current_r.replace(input, single_jobs_deliveries, job_ranks, 0, 0);
     }
   }
 }

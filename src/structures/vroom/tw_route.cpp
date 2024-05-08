@@ -1482,25 +1482,24 @@ template void TWRoute::replace(const Input& input,
                                const Index first_rank,
                                const Index last_rank);
 
-template void
-TWRoute::replace(const Input& input,
-                 const Amount& delivery,
-                 const std::ranges::subrange<std::vector<Index>::iterator>& range,
-                 const Index first_rank,
-                 const Index last_rank);
+template void TWRoute::replace(
+  const Input& input,
+  const Amount& delivery,
+  const std::ranges::subrange<std::vector<Index>::iterator>& range,
+  const Index first_rank,
+  const Index last_rank);
 
-template void
-TWRoute::replace(const Input& input,
-                 const Amount& delivery,
-                 const std::ranges::subrange<std::vector<Index>::reverse_iterator>& range,
-                 const Index first_rank,
-                 const Index last_rank);
+template void TWRoute::replace(
+  const Input& input,
+  const Amount& delivery,
+  const std::ranges::subrange<std::vector<Index>::reverse_iterator>& range,
+  const Index first_rank,
+  const Index last_rank);
 
-template void
-TWRoute::replace(const Input& input,
-                 const Amount& delivery,
-                 const std::array<Index, 1>& range,
-                 const Index first_rank,
-                 const Index last_rank);
+template void TWRoute::replace(const Input& input,
+                               const Amount& delivery,
+                               const std::array<Index, 1>& range,
+                               const Index first_rank,
+                               const Index last_rank);
 
 } // namespace vroom

@@ -110,11 +110,7 @@ void IntraCrossExchange::apply() {
               _moved_jobs[_moved_jobs.size() - 1]);
   }
 
-  _tw_s_route.replace(_input,
-                      _delivery,
-                      _moved_jobs,
-                      _first_rank,
-                      _last_rank);
+  _tw_s_route.replace(_input, _delivery, _moved_jobs, _first_rank, _last_rank);
 }
 
 std::vector<Index> IntraCrossExchange::addition_candidates() const {

@@ -48,11 +48,7 @@ void IntraTwoOpt::apply() {
   std::vector<Index> reversed(s_route.rbegin() + (s_route.size() - t_rank - 1),
                               s_route.rbegin() + (s_route.size() - s_rank));
 
-  _tw_s_route.replace(_input,
-                      delivery,
-                      reversed,
-                      s_rank,
-                      t_rank + 1);
+  _tw_s_route.replace(_input, delivery, reversed, s_rank, t_rank + 1);
 }
 
 } // namespace vroom::vrptw

@@ -90,10 +90,7 @@ void PDShift::apply() {
             std::back_inserter(target_with_pd));
   target_with_pd.push_back(s_route[_s_d_rank]);
 
-  target.replace(_input,
-                 target_with_pd,
-                 _best_t_p_rank,
-                 _best_t_d_rank);
+  target.replace(_input, target_with_pd, _best_t_p_rank, _best_t_d_rank);
 
   if (_s_d_rank == _s_p_rank + 1) {
     s_route.erase(s_route.begin() + _s_p_rank, s_route.begin() + _s_p_rank + 2);
@@ -101,10 +98,7 @@ void PDShift::apply() {
   } else {
     std::vector<Index> source_without_pd(s_route.begin() + _s_p_rank + 1,
                                          s_route.begin() + _s_d_rank);
-    source.replace(_input,
-                   source_without_pd,
-                   _s_p_rank,
-                   _s_d_rank + 1);
+    source.replace(_input, source_without_pd, _s_p_rank, _s_d_rank + 1);
   }
 }
 

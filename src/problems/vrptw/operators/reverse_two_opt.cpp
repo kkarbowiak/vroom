@@ -58,7 +58,9 @@ void ReverseTwoOpt::apply() {
 
   _tw_t_route.replace(_input,
                       _s_delivery,
-                      std::ranges::subrange(s_route.rbegin(), s_route.rbegin() + s_route.size() - 1 - s_rank),
+                      std::ranges::subrange(s_route.rbegin(),
+                                            s_route.rbegin() + s_route.size() -
+                                              1 - s_rank),
                       0,
                       t_rank + 1);
 

@@ -41,11 +41,7 @@ bool UnassignedExchange::is_valid() {
 }
 
 void UnassignedExchange::apply() {
-  _tw_s_route.replace(_input,
-                      _delivery,
-                      _moved_jobs,
-                      _first_rank,
-                      _last_rank);
+  _tw_s_route.replace(_input, _delivery, _moved_jobs, _first_rank, _last_rank);
 
   assert(_unassigned.find(_u) != _unassigned.end());
   _unassigned.erase(_u);

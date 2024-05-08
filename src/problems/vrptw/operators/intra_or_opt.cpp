@@ -71,11 +71,7 @@ void IntraOrOpt::apply() {
     std::swap(_moved_jobs[_s_edge_first], _moved_jobs[_s_edge_last]);
   }
 
-  _tw_s_route.replace(_input,
-                      _delivery,
-                      _moved_jobs,
-                      _first_rank,
-                      _last_rank);
+  _tw_s_route.replace(_input, _delivery, _moved_jobs, _first_rank, _last_rank);
 }
 
 std::vector<Index> IntraOrOpt::addition_candidates() const {

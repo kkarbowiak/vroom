@@ -67,18 +67,18 @@ void OrOpt::apply() {
     auto s_reverse_start = s_route.rbegin() + s_route.size() - 2 - s_rank;
     _tw_t_route.replace(_input,
                         edge_delivery,
-                        std::ranges::subrange(s_reverse_start, s_reverse_start + 2),
+                        std::ranges::subrange(s_reverse_start,
+                                              s_reverse_start + 2),
                         t_rank,
                         t_rank);
     _tw_s_route.remove(_input, s_rank, 2);
   } else {
     auto s_start = s_route.begin() + s_rank;
-    _tw_t_route
-      .replace(_input,
-               edge_delivery,
-               std::ranges::subrange(s_start, s_start + 2),
-               t_rank,
-               t_rank);
+    _tw_t_route.replace(_input,
+                        edge_delivery,
+                        std::ranges::subrange(s_start, s_start + 2),
+                        t_rank,
+                        t_rank);
     _tw_s_route.remove(_input, s_rank, 2);
   }
 }

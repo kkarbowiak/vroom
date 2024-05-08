@@ -37,11 +37,7 @@ bool IntraRelocate::is_valid() {
 }
 
 void IntraRelocate::apply() {
-  _tw_s_route.replace(_input,
-                      _delivery,
-                      _moved_jobs,
-                      _first_rank,
-                      _last_rank);
+  _tw_s_route.replace(_input, _delivery, _moved_jobs, _first_rank, _last_rank);
 }
 
 std::vector<Index> IntraRelocate::addition_candidates() const {
